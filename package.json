@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "serve": "concurrently \"npm run dev\" \" cd client && npm run start\""
+    "start": "concurrently \"npm run dev\" \" cd client && npm run start\""
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,6 @@
     "nodemon": "^2.0.16"
   },
   "engines": {
-    "node": "14.x"
+    "node": "16.x"
   }
 }

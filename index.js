@@ -3,6 +3,8 @@ const express = require('express')
 const sequelize = require('./db')
 const cors = require('cors')
 
+
+
 const router = require('./routes')
 
 const PORT = process.env.PORT || 5000
