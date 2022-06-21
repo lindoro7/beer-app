@@ -17,7 +17,8 @@ app.use('/api', router)
 const start = async () => {
   try {
     await sequelize.authenticate()
-    await sequelize.sync()
+    // await sequelize.sync()
+    console.log('connection established')
     app.listen(PORT, () => console.log(`Sever started at port ${PORT}`))
   } catch (error) {
     console.log(error)
