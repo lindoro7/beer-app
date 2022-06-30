@@ -1,15 +1,15 @@
-const {Sequelize} = require('sequelize')
+const { Sequelize } = require("sequelize");
 
-// module.exports = new Sequelize(
-//   process.env.DB_NAME,
-//   process.env.DB_USER,
-//   process.env.DB_PASSWORD,
-//   {
-//     dialect: 'postgres',
-//     host: process.env.DB_HOST,
-//     port: process.env.DB_PORT 
-//   }
-// )
-const DB_URL = process.env.DATABASE_URL
-const sequelize = new Sequelize(DB_URL)
-module.exports = sequelize
+const DB_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.DATABASE_URL
+    : "postgres://beer:beer@127.0.0.1:5432/beer";
+const sequelize = new Sequelize(DB_URL, {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    },
+  },
+});
+module.exports = sequelize;
