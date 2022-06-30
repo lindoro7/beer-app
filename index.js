@@ -17,7 +17,9 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, "client", "public")));
+process.env.NODE_ENV === "production"
+  ? app.use(express.static(path.join(__dirname, "client", "build")))
+  : app.use(express.static(path.join(__dirname, "client", "public")));
 app.use("/api", router);
 
 const start = async () => {
