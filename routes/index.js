@@ -1,18 +1,16 @@
-const Router = require('express')
-const router = new Router()
+const Router = require("express");
+const router = new Router();
 
-const clientRouter = require('./clientRouter')
-const drinkRouter = require('./drinkRouter')
-const equipmentRouter = require('./equipmentRouter')
-const maintenanceRouter = require('./maintenanceRouter')
-const taskRouter = require('./taskRouter')
-const userRouter = require('./userRouter')
+const drinkRouter = require("./drinkRouter");
+const equipmentRouter = require("./equipmentRouter");
+const userRouter = require("./userRouter");
+const equipmentTypeRouter = require("./equipmentTypeRouter");
+const authRouter = require("./authRouter");
 
-router.use('/client', clientRouter)
-router.use('/drink', drinkRouter)
-router.use('/equipment', equipmentRouter)
-router.use('/maintenance', maintenanceRouter)
-router.use('/task', taskRouter)
-router.use('/user', userRouter)
+router.use("/drink", drinkRouter);
+router.use("/equipment", equipmentRouter);
+router.use("/user", userRouter);
+router.use("/equipment-type", equipmentTypeRouter);
+router.use("/auth", authRouter);
 
-module.exports = router
+module.exports = router;
