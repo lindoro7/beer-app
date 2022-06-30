@@ -1,9 +1,5 @@
 const Router = require("express");
 const bcrypt = require("bcryptjs");
-<<<<<<< HEAD
-const jwt = require("jsonwebtoken");
-=======
->>>>>>> e4f3c1d819d5f8b8e05373a3cc185a69458eb461
 const { check, checkSchema, validationResult } = require("express-validator");
 const router = new Router();
 const { User } = require("../models/models");
