@@ -1,6 +1,9 @@
 const Router = require("express");
 const bcrypt = require("bcryptjs");
+<<<<<<< HEAD
 const jwt = require("jsonwebtoken");
+=======
+>>>>>>> e4f3c1d819d5f8b8e05373a3cc185a69458eb461
 const { check, checkSchema, validationResult } = require("express-validator");
 const router = new Router();
 const { User } = require("../models/models");
@@ -93,16 +96,6 @@ router.post(
       if (!isMatched) {
         return res.status(400).json({ message: "Пароли не совпадают" });
       }
-
-      const token = await jwt.sign(
-        { userId: user.id },
-        process.env.JWT_SECRET,
-        {
-          expiresIn: "1h",
-        }
-      );
-
-      res.json(token, user.id);
 
       return res.status(201).json({ message: "Пользователь создан" });
     } catch (error) {
