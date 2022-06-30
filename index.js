@@ -24,7 +24,7 @@ const start = async () => {
   try {
     await sequelize.authenticate();
     // await sequelize.sync();
-    await sequelize.sync({ force: true });
+    // await sequelize.sync({ force: true });
     // await EquipmentType.bulkCreate([
     //   { name: "Пеногасители" },
     //   { name: "Заборные головки" },
@@ -40,20 +40,20 @@ const start = async () => {
     //   { name: "Заборная головка тип S", equipmentTypeId: 2 },
     // ]);
 
-    await User.bulkCreate([
-      {
-        name: "Vova",
-        email: "v@v.ru",
-        password: "123456",
-        contact: "1234567890",
-      },
-      {
-        name: "Jim",
-        email: "j@j.ru",
-        password: "123456",
-        contact: "1234567890",
-      },
-    ]);
+    // await User.bulkCreate([
+    //   {
+    //     name: "Vova",
+    //     email: "v@v.ru",
+    //     password: "123456",
+    //     contact: "1234567890",
+    //   },
+    //   {
+    //     name: "Jim",
+    //     email: "j@j.ru",
+    //     password: "123456",
+    //     contact: "1234567890",
+    //   },
+    // ]);
 
     app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
   } catch (error) {

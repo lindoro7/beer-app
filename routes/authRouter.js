@@ -1,5 +1,6 @@
 const Router = require("express");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const { check, checkSchema, validationResult } = require("express-validator");
 const router = new Router();
 const { User } = require("../models/models");
@@ -49,7 +50,7 @@ router.post(
         });
       }
 
-      const hashedPassword = await bcrypt.hash(password, 10);
+      const hashedPassword = await bcrypt.hash(password, 12);
       const user = User.build({
         email,
         password: hashedPassword,
@@ -87,13 +88,18 @@ router.post(
           .status(404)
           .json({ message: "Пользователь с таким email не найден" });
       }
-      const isMatched = await bcrypt.compare(password, user.password);
 
-      if (!isMatched) {
+      const isMatch = await bcrypt.compare(password, user.password);
+
+      if (!isMatch) {
         return res.status(400).json({ message: "Пароли не совпадают" });
       }
 
-      return res.status(201).json({ message: "Пользователь создан" });
+      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
+        expiresIn: "1h",
+      });
+
+      res.json({ token, userId: user.id });
     } catch (error) {
       res.status(500).json({ message: "Что-то пошло не так" });
     }
