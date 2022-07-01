@@ -19,11 +19,9 @@ const app = express();
 app.use(favicon(__dirname + "/client/build/favicon.ico"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// process.env.NODE_ENV === "production"
-//   ? app.use(express.static(path.join(__dirname, "client", "build")))
-//   : app.use(express.static(path.join(__dirname, "client", "public")));
-
-app.use(express.static(path.join(__dirname, "client", "build")));
+process.env.NODE_ENV === "production"
+  ? app.use(express.static(path.join(__dirname, "client", "build")))
+  : app.use(express.static(path.join(__dirname, "client", "public")));
 
 app.use("/api", router);
 app.get("/", function (req, res) {
