@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: true }));
 //   : app.use(express.static(path.join(__dirname, "client", "public")));
 
 app.use(express.static(path.join(__dirname, "client", "build")));
-// app.get("/", function (req, res) {
-//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-// });
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
 app.use("/api", router);
 
 const start = async () => {
