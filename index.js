@@ -16,7 +16,7 @@ const {
 const PORT = process.env.PORT || 5000;
 
 const app = express();
-app.use(favicon(__dirname + "/client/public/favicon.ico"));
+app.use(favicon(__dirname + "/client/build/favicon.ico"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // process.env.NODE_ENV === "production"
@@ -24,10 +24,11 @@ app.use(express.urlencoded({ extended: true }));
 //   : app.use(express.static(path.join(__dirname, "client", "public")));
 
 app.use(express.static(path.join(__dirname, "client", "build")));
+
+app.use("/api", router);
 app.get("/", function (req, res) {
   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
-app.use("/api", router);
 
 const start = async () => {
   try {
