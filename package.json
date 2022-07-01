@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon index.js",
     "serve": "concurrently \"npm run dev\" \"cd client && npm run start \"",
-    "server": "concurrently \"npm run start\" \"cd client && npm run build \"",
+    "server": "concurrently \"npm run start\" \"cd client && npm install && npm run build \"",
     "start": "node index.js"
   },
   "keywords": [],
