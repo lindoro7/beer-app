@@ -12,7 +12,7 @@ const {
   EquipmentType,
 } = require("./models/models");
 
-const PORT = process.env.PORT || 80;
+const PORT = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
@@ -25,22 +25,22 @@ app.use("/api", router);
 const start = async () => {
   try {
     await sequelize.authenticate();
-    // await sequelize.sync();
-    // await sequelize.sync({ force: true });
-    // await EquipmentType.bulkCreate([
-    //   { name: "Пеногасители" },
-    //   { name: "Заборные головки" },
-    //   { name: "Охладители" },
-    //   { name: "Редукторы" },
-    //   { name: "Краны" },
-    //   { name: "Башни" },
-    // ]);
+    await sequelize.sync();
+    await sequelize.sync({ force: true });
+    await EquipmentType.bulkCreate([
+      { name: "Пеногасители" },
+      { name: "Заборные головки" },
+      { name: "Охладители" },
+      { name: "Редукторы" },
+      { name: "Краны" },
+      { name: "Башни" },
+    ]);
 
-    // // await Equipment.bulkCreate([
-    //   { name: "Заборная головка тип A", equipmentTypeId: 2 },
-    //   { name: "Заборная головка тип G", equipmentTypeId: 2 },
-    //   { name: "Заборная головка тип S", equipmentTypeId: 2 },
-    // ]);
+    await Equipment.bulkCreate([
+      { name: "Заборная головка тип A", equipmentTypeId: 2 },
+      { name: "Заборная головка тип G", equipmentTypeId: 2 },
+      { name: "Заборная головка тип S", equipmentTypeId: 2 },
+    ]);
 
     // await User.bulkCreate([
     //   {

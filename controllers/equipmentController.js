@@ -1,4 +1,4 @@
-const Equipment = require("../models/models");
+const { Equipment } = require("../models/models");
 
 class EquipmentController {
   async getAll(req, res) {
@@ -6,7 +6,7 @@ class EquipmentController {
       const equipments = await Equipment.findAll();
       return res.json(equipments);
     } catch (error) {
-      console.error(err.message);
+      console.log(error.message);
     }
   }
 
@@ -21,7 +21,7 @@ class EquipmentController {
       });
       return res.json(newEquipment);
     } catch (error) {
-      console.error(error.message);
+      console.log(error.message);
     }
   }
 
