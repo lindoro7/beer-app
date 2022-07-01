@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
-const sequelize = require("./db");
 const path = require("path");
+const cors = require("cors");
+const sequelize = require("./db");
 
 const router = require("./routes");
 const {
@@ -17,12 +18,13 @@ const PORT = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cors());
 process.env.NODE_ENV === "production"
   ? app.use(express.static(path.join(__dirname, "client", "build")))
   : app.use(express.static(path.join(__dirname, "client", "public")));
 
 app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  res.sendFile(path.join(__dirname, "client", "public", "index.html"));
 });
 app.use("/api", router);
 
@@ -60,7 +62,6 @@ const start = async () => {
     //     contact: "1234567890",
     //   },
     // ]);
-
     app.listen(PORT, () => console.log(`Server started at port ${PORT}`));
   } catch (error) {
     console.log(error);
