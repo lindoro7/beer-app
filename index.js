@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const favicon = require("express-favicon");
 const sequelize = require("./db");
 const path = require("path");
 
@@ -15,6 +16,7 @@ const {
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+app.use(favicon(__dirname + "client/public/favicon.ico"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // process.env.NODE_ENV === "production"
