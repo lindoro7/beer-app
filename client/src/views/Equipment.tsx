@@ -6,9 +6,10 @@ function Equipment() {
 
   const fetchEquipment = async () => {
     try {
-      const data = await fetch("https://beer-cms.herokuapp.com/api/equipment");
+      const data = await fetch("http://localhost:5000/api/equipment");
       const equipment = await data.json();
       setEquip(equipment);
+      console.log(process.env.REACT_APP_DEV_URL);
     } catch (error) {
       console.log(error);
     }
