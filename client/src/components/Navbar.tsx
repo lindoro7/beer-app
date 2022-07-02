@@ -9,7 +9,7 @@ function Navbar() {
           <li className='h-max'>
             <NavLink
               to='/'
-              className='px-2 py-2 inline-block text-center align-middle'
+              className='rounded px-2 py-2 inline-block text-center align-middle'
             >
               Home
             </NavLink>
@@ -17,7 +17,7 @@ function Navbar() {
           <li>
             <NavLink
               to='/about'
-              className='px-2 py-2 inline-block text-center align-middle'
+              className='rounded px-2 py-2 inline-block text-center align-middle'
             >
               About
             </NavLink>
@@ -25,7 +25,7 @@ function Navbar() {
           <li>
             <NavLink
               to='/equipment'
-              className='px-2 py-2 inline-block text-center align-middle'
+              className='rounded px-2 py-2 inline-block text-center align-middle'
             >
               Equipment
             </NavLink>
