@@ -1,22 +1,38 @@
-import { Routes, Route, Link } from "react-router-dom";
-import Home from "../views/Home";
-import About from "../views/About";
-import Equipment from "../views/Equipment";
+import { NavLink, useLocation } from "react-router-dom";
 
 function Navbar() {
   return (
-    <div>
-      <nav>
-        <Link to='/'>Home</Link>
-        <Link to='/about'>About</Link>
-        <Link to='/equipment'>Equipment</Link>
+    <>
+      <nav className='flex flex-nowrap justify-between'>
+        <div className='text-white text-3xl '>Keller</div>
+        <ul className='flex flex-nowrap text-white '>
+          <li className='h-max'>
+            <NavLink
+              to='/'
+              className='px-2 py-2 inline-block text-center align-middle'
+            >
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/about'
+              className='px-2 py-2 inline-block text-center align-middle'
+            >
+              About
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to='/equipment'
+              className='px-2 py-2 inline-block text-center align-middle'
+            >
+              Equipment
+            </NavLink>
+          </li>
+        </ul>
       </nav>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/about' element={<About />} />
-        <Route path='/equipment' element={<Equipment />} />
-      </Routes>
-    </div>
+    </>
   );
 }
 
