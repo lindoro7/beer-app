@@ -6,7 +6,7 @@ function Equipment() {
 
   const fetchEquipment = async () => {
     try {
-      const data = await fetch("https://beer-cms.herokuapp.com/api/equipment");
+      const data = await fetch("/api/equipment");
       const equipment = await data.json();
       setEquip(equipment);
       console.log(process.env.NODE_ENV);
