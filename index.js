@@ -28,9 +28,9 @@ process.env.NODE_ENV === "production"
 // });
 app.use("/api", router);
 
-app.get("*", function (err, req, res, next) {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
+// app.get("*", function (err, req, res, next) {
+//   res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+// });
 
 const start = async () => {
   try {
