@@ -47,7 +47,7 @@ function Navbar() {
             "absolute w-full top-[60px] pt-5 z-5 md:z-0 md:pt-0 bottom-0 left-0 md:w-auto bg-gray-500 md:static md:flex md:flex-nowrap text-white " +
             (isOpen
               ? "translate-x-0 ease-in-out duration-300"
-              : "-translate-x-[100%] ease-in-out duration-300")
+              : "-translate-x-[100%] md:transform-none ease-in-out duration-300")
           }
         >
           <li>
