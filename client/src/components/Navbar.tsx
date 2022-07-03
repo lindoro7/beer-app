@@ -50,7 +50,7 @@ function Navbar() {
               : "-translate-x-[100%] md:transform-none ease-in-out duration-300")
           }
         >
-          <li>
+          <li onClick={() => setIsOpen(!isOpen)}>
             <NavLink
               to='/'
               className='w-30 rounded px-2 py-2 block md:inline-block text-center align-middle'
@@ -58,7 +58,7 @@ function Navbar() {
               Home
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setIsOpen(!isOpen)}>
             <NavLink
               to='/about'
               className='rounded px-2 py-2 block md:inline-block text-center align-middle'
@@ -66,7 +66,7 @@ function Navbar() {
               About
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setIsOpen(!isOpen)}>
             <NavLink
               to='/equipment'
               className='rounded px-2 py-2 block md:inline-block text-center align-middle'
@@ -74,7 +74,7 @@ function Navbar() {
               Equipment
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setIsOpen(!isOpen)}>
             <NavLink
               to='/login'
               className='rounded px-2 py-2 block md:inline-block text-center align-middle'
@@ -82,7 +82,7 @@ function Navbar() {
               Login
             </NavLink>
           </li>
-          <li>
+          <li onClick={() => setIsOpen(!isOpen)}>
             <NavLink
               to='/register'
               className='rounded px-2 py-2 block md:inline-block text-center align-middle'
