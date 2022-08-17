@@ -10,6 +10,7 @@ router.post(
     email: {
       isEmail: {
         bail: true,
+        errorMessage: "Введите корректный email",
       },
     },
     password: {

@@ -30,7 +30,7 @@ function Login() {
             Войти
           </button>
           <span className='inline-block '>
-            Есть аккаунт?{" "}
+            Еще нет аккаунта?
             <Link to='/register' className='text-green-700 pl-5'>
               Зарегистрироваться
             </Link>
