@@ -29,7 +29,7 @@ function Register() {
     setContact(e.currentTarget.value);
   };
 
-  const loginHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  const registerHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     let response = await fetch("api/auth/register", {
       method: "POST",
@@ -40,7 +40,6 @@ function Register() {
     });
 
     let data = await response.json();
-    console.log(data.message, data.errors);
     if (data.message) {
       setMessage(data.message);
     }
@@ -137,7 +136,7 @@ function Register() {
         <>
           <button
             className='block w-full border-solid border-2 rounded-md bg-gray-500 h-10 text-white mb-5'
-            onClick={loginHandler}
+            onClick={registerHandler}
           >
             Зарегистрироваться
           </button>

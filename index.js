@@ -25,8 +25,8 @@ process.env.NODE_ENV === "production"
 
 app.use("/api", router);
 
-app.get("/*", (req, res) => {
-  res.redirect("/");
+app.get("*", (req, res) => {
+  res.send("/");
 });
 
 const start = async () => {

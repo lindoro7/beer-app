@@ -60,11 +60,15 @@ class UserController {
         return res.status(400).json({ message: "Пароли не совпадают" });
       }
 
-      const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign(
+        { userId: user.id, role: user.role },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "24h",
+        }
+      );
 
-      res.json({ token, userId: user.id });
+      res.json({ token, userId: user.id, message: "Вы вошли" });
     } catch (error) {
       res.status(500).json({ message: "Что-то пошло не так" });
     }

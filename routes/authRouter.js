@@ -40,7 +40,9 @@ router.post(
   [
     //another way check
     check("email", "Введите корректный Email").normalizeEmail().isEmail(),
-    check("password", "Введите пароль").exists(),
+    check("password", "Пароль должен быть минимум 6 символов")
+      .exists()
+      .isLength({ min: 6 }),
   ],
   userController.login
 );
