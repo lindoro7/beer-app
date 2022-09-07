@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { userLogin } from "../store/actions/userActions";
 
 function Login() {
-  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
-  const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState([]);
-  const [emailError, setEmailError] = useState("");
+  const [loginError, setLoginError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   let navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const { errors, message, user } = useAppSelector((state) => state.user);
 
   const emailHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.currentTarget.value);
+    setLogin(e.currentTarget.value);
   };
 
   const passwordHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -20,43 +22,27 @@ function Login() {
 
   const loginHandler = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-
-    let response = await fetch("api/auth/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-
-    let data = await response.json();
-    if (data.message) {
-      setMessage(data.message);
-    }
-    if (data.errors) {
-      setErrors(data.errors);
-    }
-
-    if (!data.errors) {
-      setEmail("");
-      setPassword("");
-      setErrors([]);
-      navigate("/", { replace: true });
-    }
+    dispatch(userLogin({ login, password }));
   };
 
   useEffect(() => {
     if (errors) {
       errors.forEach((err: any) => {
-        err.param === "email" && setEmailError(err.msg);
+        err.param === "login" && setLoginError(err.msg);
         err.param === "password" && setPasswordError(err.msg);
       });
     }
     return () => {
-      setEmailError("");
+      setLoginError("");
       setPasswordError("");
     };
   }, [errors]);
+
+  useEffect(() => {
+    if (user.id) {
+      navigate("/", { replace: true });
+    }
+  }, [user, navigate]);
 
   return (
     <div className='flex min-h-[85vh]  justify-center items-center'>
@@ -64,16 +50,16 @@ function Login() {
         {message && <small className='text-red-400'>{message}</small>}
         <label className='block mb-10'>
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">
-            Email
+            Login
           </span>
           <input
-            type='email'
+            type='text'
             className='mt-1 px-3 py-2 bg-white border shadow-sm border-slate-300 placeholder-slate-400 focus:outline-none focus:border-sky-500 focus:ring-sky-500 block w-full rounded-md sm:text-sm focus:ring-1'
             placeholder='Введите почту'
-            value={email}
+            value={login}
             onChange={(e) => emailHandler(e)}
           />
-          {emailError && <small className='text-red-400'>{emailError}</small>}
+          {loginError && <small className='text-red-400'>{loginError}</small>}
         </label>
         <label className='block mb-10'>
           <span className="after:content-['*'] after:ml-0.5 after:text-red-500 block text-sm font-medium text-slate-700">

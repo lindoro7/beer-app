@@ -1,8 +1,10 @@
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
+import { useAppSelector } from "../store/hooks";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user } = useAppSelector((state) => state.user);
 
   return (
     <>
@@ -46,8 +48,8 @@ function Navbar() {
           className={
             "absolute w-full top-[60px] pt-5 z-5 md:z-0 md:pt-0 bottom-0 left-0 md:w-auto bg-gray-500 md:static md:flex md:flex-nowrap text-white " +
             (isOpen
-              ? "translate-x-0 ease-in-out duration-300"
-              : "-translate-x-[100%] md:transform-none ease-in-out duration-300")
+              ? "translate-x-0 ease-in-out duration-300 z-[9999]"
+              : "-translate-x-[100%] md:transform-none ease-in-out duration-300 z-0")
           }
         >
           <li onClick={() => setIsOpen(!isOpen)}>
@@ -55,41 +57,69 @@ function Navbar() {
               to='/'
               className='w-30 rounded px-2 py-2 block md:inline-block text-center align-middle'
             >
-              Home
+              Домашняя
             </NavLink>
           </li>
-          <li onClick={() => setIsOpen(!isOpen)}>
-            <NavLink
-              to='/about'
-              className='rounded px-2 py-2 block md:inline-block text-center align-middle'
-            >
-              About
-            </NavLink>
-          </li>
-          <li onClick={() => setIsOpen(!isOpen)}>
-            <NavLink
-              to='/equipment'
-              className='rounded px-2 py-2 block md:inline-block text-center align-middle'
-            >
-              Equipment
-            </NavLink>
-          </li>
-          <li onClick={() => setIsOpen(!isOpen)}>
-            <NavLink
-              to='/login'
-              className='rounded px-2 py-2 block md:inline-block text-center align-middle'
-            >
-              Login
-            </NavLink>
-          </li>
-          <li onClick={() => setIsOpen(!isOpen)}>
-            <NavLink
-              to='/register'
-              className='rounded px-2 py-2 block md:inline-block text-center align-middle'
-            >
-              Register
-            </NavLink>
-          </li>
+          {user.role === "ADMIN" && (
+            <li onClick={() => setIsOpen(!isOpen)}>
+              <NavLink
+                to='/users'
+                className='rounded px-2 py-2 block md:inline-block text-center align-middle'
+              >
+                Пользователи
+              </NavLink>
+            </li>
+          )}
+          {!user.id && (
+            <li onClick={() => setIsOpen(!isOpen)}>
+              <NavLink
+                to='/about'
+                className='rounded px-2 py-2 block md:inline-block text-center align-middle'
+              >
+                О нас
+              </NavLink>
+            </li>
+          )}
+          {user.id && (
+            <li onClick={() => setIsOpen(!isOpen)}>
+              <NavLink
+                to='/shops'
+                className='rounded px-2 py-2 block md:inline-block text-center align-middle'
+              >
+                Магазины
+              </NavLink>
+            </li>
+          )}
+          {user.id && (
+            <li onClick={() => setIsOpen(!isOpen)}>
+              <NavLink
+                to='/equipment'
+                className='rounded px-2 py-2 block md:inline-block text-center align-middle'
+              >
+                Оборудование
+              </NavLink>
+            </li>
+          )}
+          {!user.id && (
+            <li onClick={() => setIsOpen(!isOpen)}>
+              <NavLink
+                to='/login'
+                className='rounded px-2 py-2 block md:inline-block text-center align-middle'
+              >
+                Вход
+              </NavLink>
+            </li>
+          )}
+          {!user.id && (
+            <li onClick={() => setIsOpen(!isOpen)}>
+              <NavLink
+                to='/register'
+                className='rounded px-2 py-2 block md:inline-block text-center align-middle'
+              >
+                Регистрация
+              </NavLink>
+            </li>
+          )}
         </ul>
       </nav>
     </>

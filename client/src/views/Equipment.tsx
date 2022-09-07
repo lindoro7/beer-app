@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { IEquipment } from "../interfaces";
+import { IEquipmentType } from "../interfaces";
 
 function Equipment() {
-  const [equip, setEquip] = useState<IEquipment[]>([]);
+  const [equip, setEquip] = useState<IEquipmentType[]>([]);
 
   const fetchEquipment = async () => {
     try {
-      const data = await fetch("/api/equipment");
+      const data = await fetch("/api/equipment-type");
       const equipment = await data.json();
       setEquip(equipment);
     } catch (error) {
@@ -19,14 +19,14 @@ function Equipment() {
   }, []);
 
   return (
-    <>
+    <div className='px-5 md:w-[800px] md:mx-auto'>
       <div>Equipments page</div>
       {equip.length > 0
-        ? equip.map((e: IEquipment) => {
+        ? equip.map((e: IEquipmentType) => {
             return <p key={e.id}>{e.name}</p>;
           })
         : "No equipment"}
-    </>
+    </div>
   );
 }
 
