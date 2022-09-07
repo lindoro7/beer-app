@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userLogin } from "../store/actions/userActions";
+import { nullError } from "../store/slices/userSlice";
 
 function Login() {
   const [login, setLogin] = useState("");
@@ -24,6 +25,10 @@ function Login() {
     e.preventDefault();
     dispatch(userLogin({ login, password }));
   };
+
+  useEffect(() => {
+    dispatch(nullError());
+  }, []);
 
   useEffect(() => {
     if (errors) {

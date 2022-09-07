@@ -51,7 +51,7 @@ export const userLogin = ({login, password}: userLoginProps) => {
       }
       dispatch(userSlice.actions.fetchSuccess(data))
     } catch (error) {
-      dispatch(userSlice.actions.fetchError([error as Error]))
+      dispatch(userSlice.actions.fetchError(error as Error))
     }
   }
 }
@@ -68,14 +68,27 @@ export const userRegistration = ({login, password, name = '', contact = ''}: use
         body: JSON.stringify({ login, password, name, contact }),
       })
       let data = await response.json()
-      if(data.errors) {
-        return dispatch(userSlice.actions.fetchError(data))
+      
+      if(!data.user) {
+        data.user = {
+          id: '',
+          name: '',
+          role: '',
+          login: '',
+          contact: ''
+        }
+      }
+      if(!data.errors) {
+        data.errors = []
+      }
+      if(!data.users) {
+        data.users = []
       }
 
       dispatch(userSlice.actions.fetchSuccess(data))
       
     } catch (error) {
-      dispatch(userSlice.actions.fetchError([error as Error]))
+      dispatch(userSlice.actions.fetchError(error as Error))
     }
   }
 }
@@ -93,7 +106,7 @@ export const userLogout = () => {
       let data = await response.json()
       dispatch(userSlice.actions.fetchSuccess(data))
     } catch (error) {
-      dispatch(userSlice.actions.fetchError([error as Error]))
+      dispatch(userSlice.actions.fetchError(error as Error))
     }
   }
 }
@@ -113,7 +126,7 @@ export const userUpdate = ({id, name, role, contact}: userUpdateProps) => {
       dispatch(userSlice.actions.fetchSuccess(data))
 
     } catch (error) {
-      dispatch(userSlice.actions.fetchError([error as Error]))
+      dispatch(userSlice.actions.fetchError(error as Error))
     }
   }
 }
@@ -132,7 +145,7 @@ export const fetchUsers = (user: IUser) => {
       data.user = user
       dispatch(userSlice.actions.fetchSuccess(data))
     } catch (error) {
-      dispatch(userSlice.actions.fetchError([error as Error]))
+      dispatch(userSlice.actions.fetchError(error as Error))
     }
   }
 }

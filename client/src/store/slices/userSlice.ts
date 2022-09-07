@@ -48,13 +48,16 @@ export const userSlice = createSlice({
       state.errors = action.payload.errors
       state.users = action.payload.users
     },
-    fetchError(state, action: PayloadAction<Error[]>) {
+    fetchError(state, action: PayloadAction<Error>) {
       state.loading = false
-      state.errors = action.payload
-      
+      state.message = action.payload.message
+    },
+    nullError(state) {
+      state.message = ''
+      state.errors = []
     }
   }
 })
 
-export const { fetching, fetchSuccess, fetchError } = userSlice.actions
+export const { fetching, fetchSuccess, fetchError, nullError } = userSlice.actions
 export default userSlice.reducer

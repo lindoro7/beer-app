@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { userRegistration } from "../store/actions/userActions";
+import { nullError } from "../store/slices/userSlice";
 
 function Register() {
   const [login, setLogin] = useState("");
@@ -10,8 +11,6 @@ function Register() {
   const [contact, setContact] = useState("");
   const [loginError, setLoginError] = useState("");
   const [passwordError, setPasswordError] = useState("");
-  const [nameError, setNameError] = useState("");
-  const [contactError, setContactError] = useState("");
 
   const { errors, message, user } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -39,19 +38,19 @@ function Register() {
   };
 
   useEffect(() => {
+    dispatch(nullError());
+  }, []);
+
+  useEffect(() => {
     if (errors) {
       errors.forEach((err: any) => {
         err.param === "login" && setLoginError(err.msg);
         err.param === "password" && setPasswordError(err.msg);
-        err.param === "name" && setNameError(err.msg);
-        err.param === "contact" && setContactError(err.msg);
       });
     }
     return () => {
       setLoginError("");
       setPasswordError("");
-      setNameError("");
-      setContactError("");
     };
   }, [errors]);
 
@@ -104,7 +103,7 @@ function Register() {
             value={name}
             onChange={(e) => nameHandler(e)}
           />
-          {nameError && <small className='text-red-400'>{nameError}</small>}
+          {/* {nameError && <small className='text-red-400'>{nameError}</small>} */}
         </label>
         <label className='block mb-5'>
           <span className=' block text-sm font-medium text-slate-700'>
@@ -117,9 +116,9 @@ function Register() {
             value={contact}
             onChange={(e) => contactHandler(e)}
           />
-          {contactError && (
+          {/* {contactError && (
             <small className='text-red-400'>{contactError}</small>
-          )}
+          )} */}
         </label>
         <>
           <button
