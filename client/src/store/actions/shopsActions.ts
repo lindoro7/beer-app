@@ -24,7 +24,7 @@ type shopUpdateProps = {
 export const fetchShops = () => {
   return async (dispatch: AppDispatch) => {
     try {
-      dispatch(shopsSlice.actions.fetching)
+      dispatch(shopsSlice.actions.fetching())
       let response = await fetch('api/shops')
       let data = await response.json()
       dispatch(shopsSlice.actions.fetchSuccess(data))
